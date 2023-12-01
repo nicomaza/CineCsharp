@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetTotalYear" targetNamespace="http://tempuri.org/DataSetTotalYear.xsd" xmlns:mstns="http://tempuri.org/DataSetTotalYear.xsd" xmlns="http://tempuri.org/DataSetTotalYear.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=DBTpLab.mssql.somee.com;Initial Catalog=DBTpLab;Persist Security Info=True;User ID=Lucas24865_SQLLogin_1;Password=huevoduro13" IsAppSettingsProperty="false" Modifier="Assembly" Name="vj7500.DBTpLab.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DTVentaPorSalaTableAdapter" GeneratorDataComponentClassName="DTVentaPorSalaTableAdapter" Name="DTVentaPorSala" UserDataComponentName="DTVentaPorSalaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="vj7500.DBTpLab.dbo" DbObjectName="DBTpLab.dbo.Salas" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT COUNT(t.nro_ticket) AS 'Cantidad de tickets', s.id_sala
+FROM     Tickets AS t INNER JOIN
+                  Comprobantes AS c ON c.id_comprobante = t.id_comprobante INNER JOIN
+                  Butacas AS b ON b.id_butaca = t.id_butaca INNER JOIN
+                  Salas AS s ON s.id_sala = b.id_sala
+WHERE  (DATEDIFF(year, YEAR(c.fecha), YEAR(GETDATE())) = 0)
+GROUP BY s.id_sala</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Cantidad de tickets" DataSetColumn="Cantidad de tickets" />
+              <Mapping SourceColumn="id_sala" DataSetColumn="id_sala" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TotalSalaMesTableAdapter" GeneratorDataComponentClassName="TotalSalaMesTableAdapter" Name="TotalSalaMes" UserDataComponentName="TotalSalaMesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="vj7500.DBTpLab.dbo" DbObjectName="DBTpLab.dbo.Salas" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT SUM(f.precio * p.porcentaje / 100) AS 'Monto total facturado por 
+sala', s.id_sala, MONTH(c.fecha) AS 'Mes'
+FROM     Tickets AS t INNER JOIN
+                  Comprobantes AS c ON c.id_comprobante = t.id_comprobante INNER JOIN
+                  Promos AS p ON p.id_promo = t.id_promo INNER JOIN
+                  Funciones AS f ON f.id_funcion = t.id_funcion INNER JOIN
+                  Salas AS s ON s.id_sala = f.id_sala
+GROUP BY s.id_sala, MONTH(c.fecha)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Monto total facturado por &#xD;&#xA;sala" DataSetColumn="Monto total facturado por &#xD;&#xA;sala" />
+              <Mapping SourceColumn="id_sala" DataSetColumn="id_sala" />
+              <Mapping SourceColumn="Mes" DataSetColumn="Mes" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetTotalYear" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DataSetTotalYear" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetTotalYear">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DTVentaPorSala" msprop:Generator_RowClassName="DTVentaPorSalaRow" msprop:Generator_RowEvHandlerName="DTVentaPorSalaRowChangeEventHandler" msprop:Generator_RowDeletedName="DTVentaPorSalaRowDeleted" msprop:Generator_RowDeletingName="DTVentaPorSalaRowDeleting" msprop:Generator_RowEvArgName="DTVentaPorSalaRowChangeEvent" msprop:Generator_TablePropName="DTVentaPorSala" msprop:Generator_RowChangedName="DTVentaPorSalaRowChanged" msprop:Generator_UserTableName="DTVentaPorSala" msprop:Generator_RowChangingName="DTVentaPorSalaRowChanging" msprop:Generator_TableClassName="DTVentaPorSalaDataTable" msprop:Generator_TableVarName="tableDTVentaPorSala">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Cantidad_x0020_de_x0020_tickets" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Cantidad de tickets" msprop:Generator_ColumnPropNameInTable="Cantidad_de_ticketsColumn" msprop:Generator_ColumnPropNameInRow="Cantidad_de_tickets" msprop:Generator_ColumnVarNameInTable="columnCantidad_de_tickets" type="xs:int" minOccurs="0" />
+              <xs:element name="id_sala" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="id_sala" msprop:Generator_ColumnPropNameInTable="id_salaColumn" msprop:Generator_ColumnPropNameInRow="id_sala" msprop:Generator_ColumnVarNameInTable="columnid_sala" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TotalSalaMes" msprop:Generator_RowClassName="TotalSalaMesRow" msprop:Generator_RowEvHandlerName="TotalSalaMesRowChangeEventHandler" msprop:Generator_RowDeletedName="TotalSalaMesRowDeleted" msprop:Generator_RowDeletingName="TotalSalaMesRowDeleting" msprop:Generator_RowEvArgName="TotalSalaMesRowChangeEvent" msprop:Generator_TablePropName="TotalSalaMes" msprop:Generator_RowChangedName="TotalSalaMesRowChanged" msprop:Generator_UserTableName="TotalSalaMes" msprop:Generator_RowChangingName="TotalSalaMesRowChanging" msprop:Generator_TableClassName="TotalSalaMesDataTable" msprop:Generator_TableVarName="tableTotalSalaMes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Monto_x0020_total_x0020_facturado_x0020_por_x0020__x000D__x000A_sala" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Monto total facturado por &#xD;&#xA;sala" msprop:Generator_ColumnPropNameInTable="_Monto_total_facturado_por___salaColumn" msprop:Generator_ColumnPropNameInRow="_Monto_total_facturado_por___sala" msprop:Generator_ColumnVarNameInTable="_columnMonto_total_facturado_por___sala" type="xs:int" minOccurs="0" />
+              <xs:element name="id_sala" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="id_sala" msprop:Generator_ColumnPropNameInTable="id_salaColumn" msprop:Generator_ColumnPropNameInRow="id_sala" msprop:Generator_ColumnVarNameInTable="columnid_sala" type="xs:int" />
+              <xs:element name="Mes" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Mes" msprop:Generator_ColumnPropNameInTable="MesColumn" msprop:Generator_ColumnPropNameInRow="Mes" msprop:Generator_ColumnVarNameInTable="columnMes" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DTVentaPorSala" />
+      <xs:field xpath="mstns:id_sala" />
+    </xs:unique>
+    <xs:unique name="TotalSalaMes_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TotalSalaMes" />
+      <xs:field xpath="mstns:id_sala" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
